@@ -36,7 +36,13 @@ t = datetime.datetime.now().strftime("%Y-%m-%d %H:%m:%S") #https://github.com/s2
 
 while True:
     user_input = input("Please input a product identifier, or 'DONE' if there are no more items: ")
-   
+
+    #User Input Validation
+    if 0 < int(user_input) < len(products):
+        print("nice")
+    else:
+        print("Hey, are you sure that product identifier is correct? Please try again by inputting a value between 1 and " + str(len(products)))
+    
     if user_input == "DONE":
         print ("-------------------------------------------")
         print ("Sarah's Grocery Store")
@@ -62,21 +68,28 @@ while True:
            sum = sum + p["price"]
            x = sum 
 
-        #to finish banana challenge 
+           r = []
+           r.append(("+ " + p["name"] + " " + str (price_usd)))
+           print(r)
 
-    
+        #Writing values to a receipt file
+           with open('receipts/receipt.' + str(t) + 'txt', "w") as file: #https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/file-management.md
+            file.write("Below Please Find Your Grocery List!")
+            file.write("\n")
+            file.write("Checkout time: " + str(t))
+            file.write("\n")
+            file.write("-------------------------------------")
+            file.write("\n")
+            file.write("+ " + p["name"] + " " + str (price_usd))
+        
+        
+        
         tax = sum * .0875 #fixed tax
         total = tax + sum
         subtotal = '${0:.2f}'.format(x)
 
-        with open('receipts/receipt.' + str(t) + 'txt', "w") as file: #https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/file-management.md
-            file.write("hello")
-            file.write("\n")
-            file.write("\n")
-            file.write("...")
-            file.write("\n")
-            file.write("\n")
-            file.write("Hello Again")
+            #to finish banana challenge 
+            #to figure out how to get it to write on seperate lines
 
         print ("-------------------------------------------")
         print ("Subtotal: " + subtotal)
