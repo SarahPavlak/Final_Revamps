@@ -13,3 +13,7 @@
 
 #Installations: 
 #pip install pytest
+
+#Setting up Travis CI:
+#Log onto Travis-CI.org
+#Find your repository on Github and activate it
