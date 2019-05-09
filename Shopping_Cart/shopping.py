@@ -1,3 +1,5 @@
+# shopping_cart.py
+
 import datetime
 
 products = [
@@ -23,26 +25,20 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25, "price_per":"item"},
     {"id":21, "name": "Organic Bananas", "department": "beverages", "aisle": "juice nectars", "price": 0.79, "price_per":"pound"} #extra challenge of price per pound
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
-
-
 print("Shopping Cart")
+
 
 l=[]
 def checkout_time(any_products):
    return any_product ["name"]
 
-t = datetime.datetime.now().strftime("%Y-%m-%d %H:%m:%S") #https://github.com/s2t2/shopping-cart-project/blob/master/shopping_cart.py
+def to_usd(my_price):
+    return "${0:,.2f}".format(my_price)
 
+t = datetime.datetime.now().strftime("%Y-%m-%d %H:%m:%S") #https://github.com/s2t2/shopping-cart-project/blob/master/shopping_cart.py
 
 while True:
     user_input = input("Please input a product identifier, or 'DONE' if there are no more items: ")
-
-    #User Input Validation
-    if 0 < int(user_input) < len(products):
-        print("nice")
-    else:
-        print("Hey, are you sure that product identifier is correct? Please try again by inputting a value between 1 and " + str(len(products)))
-    
     if user_input == "DONE":
         print ("-------------------------------------------")
         print ("Sarah's Grocery Store")
@@ -52,49 +48,45 @@ while True:
         print ("Checkout Time: " + str(t))
         print ("-------------------------------------------")
 
+
         def sort_by_name(any_product):
             return any_product["name"]
         sorted_products = sorted(products,key=sort_by_name)
         
         matching_products = [p for p in products if p["id"] in l]
-
+        
         product = matching_products[0]
         price = (product["price"]) 
 
         sum = 0
         for p in matching_products:
-           price_usd = "${0: .2f}".format(p["price"])
-           print("+ " + p["name"] + " " + str (price_usd))
-           sum = sum + p["price"]
-           x = sum 
+            #price_usd = p["price"]
+            price_usd = "${0: .2f}".format(p["price"])
+            receipt_item = ("+ " + p["name"] + " (" + str (price_usd) + ")") 
+            sum = sum + p["price"]
+            x = sum
 
-           r = []
-           r.append(("+ " + p["name"] + " " + str (price_usd)))
-           print(r)
+            r = []
+            r.append(("+ " + p["name"] + " " + str (price_usd)))
 
         #Writing values to a receipt file
-           with open('receipts/receipt.' + str(t) + 'txt', "w") as file: #https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/file-management.md
+        with open('receipts/receipt.' + str(t) + 'txt', "w") as file: #https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/file-management.md
             file.write("Below Please Find Your Grocery List!")
             file.write("\n")
             file.write("Checkout time: " + str(t))
             file.write("\n")
             file.write("-------------------------------------")
             file.write("\n")
-            file.write("+ " + p["name"] + " " + str (price_usd))
-        
-        
-        
+            file.write(receipt_item)
+
         tax = sum * .0875 #fixed tax
         total = tax + sum
-        subtotal = '${0:.2f}'.format(x)
-
-            #to finish banana challenge 
-            #to figure out how to get it to write on seperate lines
+        subtotal = x
 
         print ("-------------------------------------------")
-        print ("Subtotal: " + subtotal)
-        print ("Plus NYC Sales Tax (8.875%): " + '${0:.2f}'.format(tax))
-        print ("Total: " + '${0:.2f}'.format(total))
+        print ("Subtotal: " + str(to_usd(subtotal)))
+        print ("NYC Sales Tax: " + str(to_usd(tax)))
+        print ("Total: " + str(to_usd(total)))
         print ("You have purchased " + str(len(l)) + " items")
 
         print ("-------------------------------------------")
@@ -103,3 +95,4 @@ while True:
         break
 
     else:
+        l.append(int(user_input))
