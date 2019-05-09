@@ -39,6 +39,13 @@ t = datetime.datetime.now().strftime("%Y-%m-%d %H:%m:%S") #https://github.com/s2
 
 while True:
     user_input = input("Please input a product identifier, or 'DONE' if there are no more items: ")
+    if user_input == "21":
+        banana_input = input("Please select the number of banana pounds you are buying: ")
+        banana_price = .79 * int(banana_input)
+        print("Banana price: " + to_usd(banana_price))
+    else:
+        pass
+
     if user_input == "DONE":
         print ("-------------------------------------------")
         print ("Sarah's Grocery Store")
@@ -60,30 +67,35 @@ while True:
 
         sum = 0
         r = []
+
+        sub = []
         for p in matching_products:
-            #price_usd = p["price"]
-            price_usd = "${0: .2f}".format(p["price"])
-            receipt_item = ("+ " + p["name"] + " (" + str (price_usd) + ")") 
-            print(receipt_item)
-            sum = sum + p["price"]
-            x = sum
+            if (p["id"]) == 21:
+                price_usd = banana_price
+                receipt_item = ("+ " + p["name"] + " (" + to_usd(banana_price) + ")")
+                print(receipt_item)
+                sum = price_usd
+                x = sum 
+                r.append(("+ " + p["name"] + " $" + str (price_usd)))
+                sub.append(x)
+  
+            if p["id"] != 21: 
+                price_usd = "${0: .2f}".format(p["price"])
+                receipt_item = ("+ " + p["name"] + " (" + str (price_usd) + ")") 
+                print(receipt_item)
+                sum = sum + p["price"]
+                x = sum
+                r.append(("+ " + p["name"] + " " + str (price_usd)))   
+                sub.append(x)
+
+            else:
+                pass
             
-            r.append(("+ " + p["name"] + " " + str (price_usd)))
-
-        #Writing values to a receipt file
-        with open('receipts/receipt.' + str(t) + 'txt', "w") as file: #https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/file-management.md
-            file.write("Below Please Find Your Grocery List!")
-            file.write("\n")
-            file.write("Checkout time: " + str(t))
-            file.write("\n")
-            file.write("-------------------------------------")
-            file.write("\n")
-            file.write(receipt_item)
-
-        tax = sum * .0875 #fixed tax
-        total = tax + sum
-        subtotal = x
-
+        subs = sub[-1] + sub[-2] #getting values from for loop
+        subtotal = subs
+        tax = subtotal * .0875 #fixed tax
+        total = tax + subtotal
+        
         print ("-------------------------------------------")
         print ("Subtotal: " + str(to_usd(subtotal)))
         print ("NYC Sales Tax: " + str(to_usd(tax)))
@@ -94,6 +106,18 @@ while True:
         print ("Thank you for your business, please come again!")
 
 
+        #Writing values to a receipt file
+        with open('receipts/receipt.' + str(t) + 'txt', "w") as file: #https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/file-management.md
+            file.write("Below Please Find Your Grocery List!")
+            file.write("\n")
+            file.write("Checkout time: " + str(t))
+            file.write("\n")
+            file.write("-------------------------------------")
+            file.write("\n")
+            file.write(str(r)) #having trouble getting them on different lines; tried an if statement with len r against an x variable then x = x + 1 but didnt print on different lines
+            file.write("\n")
+            file.write("Total Price: " + to_usd(total))
+            file.write("\n") 
 
     else:
         l.append(int(user_input))
