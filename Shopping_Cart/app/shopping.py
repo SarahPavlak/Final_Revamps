@@ -66,7 +66,6 @@ while True:
             receipt_item = ("+ " + p["name"] + " (" + str (price_usd) + ")") 
             sum = sum + p["price"]
             x = sum
-
             
             r.append(("+ " + p["name"] + " " + str (price_usd)))
 

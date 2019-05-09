@@ -38,26 +38,50 @@ if user_input in sales:
     with open("data/" + user_input, 'r') as csvfile:
         reader = csv.DictReader(csvfile)
 
-
         #transforming from hard to dynamic code
-        u= [] #creating a unique list of product names
-       
-        
         count = {}
         for row in reader:
             d = dict(row)
             d = {"date": row["date"], "product": row["product"], "unit price": float(row["unit price"]), "units sold": row["units sold"], "sales price": row["sales price"]}
-        
+            total_sales = float(d['units sold'])* float(d['unit price'])
+
             if d["product"] not in count:
-                count[d['product']] = float(d['units sold'])
+                count[d['product']] = (total_sales)
             else:
-                count[d['product']] += float(d['units sold'])
-    
-        print(count)
-        print(count.keys())
-        woo = list(count.items())
-        print(woo)
+                count[d['product']] += (total_sales)
 
+        for k,v in count.items():
+            print("KEY:", k, "VALUE:", v) #https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/653848be8fbc6c59cd98493e946da2b0532bfaba/notes/python/datatypes/dictionaries.md
 
+            #setting up bar data
 
+            bar_data = [
+                {"Product": k, "Revenue USD": v}
+            ]
 
+            x = []
+            y = []
+
+            for i in range(0, len(bar_data)):
+                x.append(bar_data[i]['Product'])
+                y.append(bar_data[i]['Revenue USD'])
+
+            data = [go.Bar(
+                        x=x,
+                        y=y,
+                )]
+            layout = go.Layout(title='Product Profits ' + str(month_lookup(month)) + " " + year,
+                xaxis = dict(title="Item"),
+                yaxis = dict(title="Sales (USD)"), 
+                margin= go.layout.Margin(l=150, pad=8) 
+                )
+                #code adapted from: https://github.com/s2t2/exec-dash-starter-py/blob/master/monthly_sales.py 
+
+            figure = go.Figure(data = data,layout=layout)
+            py.offline.plot(figure, filename='basic-bar.html', auto_open = True)
+
+                #bar code adapted from: madeline's shared class version
+                  
+
+else:
+    print("Oh no, it looks like you have entered an invalid input! Please try again")

@@ -1,4 +1,4 @@
-from app.my_shopping_test import to_usd, human_friendly_timestamp
+from app.my_shopping_test import to_usd, human_friendly_timestamp, product_totals
 import datetime 
 
 
@@ -16,6 +16,10 @@ def test_human_friendly_timestamp():
     t = datetime.datetime(2012, 2, 23, 0, 0)
     result = human_friendly_timestamp()
     assert result == t.strftime('%m/%d/%Y')
+
+def test_product_totals():
+    result = product_totals()
+    assert result == '$ 9.48'
 
 
 
