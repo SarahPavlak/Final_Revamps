@@ -64,6 +64,7 @@ while True:
             #price_usd = p["price"]
             price_usd = "${0: .2f}".format(p["price"])
             receipt_item = ("+ " + p["name"] + " (" + str (price_usd) + ")") 
+            print(receipt_item)
             sum = sum + p["price"]
             x = sum
             
