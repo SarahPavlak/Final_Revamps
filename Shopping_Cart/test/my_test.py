@@ -10,3 +10,6 @@ def test_to_usd():
 
     result = to_usd(1057.70)
     assert result == '$1,057.70'
+
+    result = to_usd(12)
+    assert result == '$12.00'
