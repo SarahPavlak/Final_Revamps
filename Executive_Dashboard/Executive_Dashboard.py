@@ -48,7 +48,7 @@ if user_input in sales:
             product_names = d["product"]
             product_price = d["sales price"]
             
-            
+
             #gets list without duplicates
             if product_names not in u:
                 u.append(product_names)
@@ -56,17 +56,13 @@ if user_input in sales:
                 total = 0
                 total = 0 + float(product_price)
 
-                my_dict = {"product": unique_products, "sales price": total}
                 print(my_dict)
 
             else:
                 pass
+
             
 
     
 
-          
-
-
-        
-            #https://www.saltycrane.com/blog/2007/09/how-to-sort-python-dictionary-by-keys/
+    
