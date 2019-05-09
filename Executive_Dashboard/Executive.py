@@ -62,7 +62,3 @@ if user_input in sales:
                 pass
 
             
-
-    
-
-    
