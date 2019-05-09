@@ -11,8 +11,9 @@
 # conda activate final_revamps
 
 
-#Installations: 
+#Running Tests
 #pip install pytest
+#Note: You have to be in the folder you are checking to run the test. If you run it off the main repo it won't work--> your pwd has to be Shopping_Cart, Executive_Dashboard etc. 
 
 #Setting up Travis CI:
 #Log onto Travis-CI.org
