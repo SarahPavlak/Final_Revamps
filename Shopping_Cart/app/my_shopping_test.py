@@ -63,6 +63,19 @@ def product_totals():
     final_total = ("${0: .2f}".format(product_total))
     return(final_total)
 
+def finding_products():
+    for p in products:
+        user_input = 7
+        product_id = p["id"]
+
+        if user_input == product_id: 
+            price = (p["price"])
+            format_price = "${0: .2f}".format(price)
+            product = p["name"]
+            product_details = (product + " " + str(format_price))
+        else:
+            pass
+    return product_details
 
 
 

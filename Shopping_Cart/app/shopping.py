@@ -47,6 +47,7 @@ while True:
         pass
 
     if user_input == "DONE":
+   
         print ("-------------------------------------------")
         print ("Sarah's Grocery Store")
         print ("-------------------------------------------")
@@ -54,7 +55,6 @@ while True:
         print ("Phone: 123-456-7890")
         print ("Checkout Time: " + str(t))
         print ("-------------------------------------------")
-
 
         def sort_by_name(any_product):
             return any_product["name"]
@@ -68,6 +68,7 @@ while True:
         sum = 0
         r = []
 
+        #Setting up Banana Challenge
         sub = []
         for p in matching_products:
             if (p["id"]) == 21:
@@ -105,7 +106,6 @@ while True:
         print ("-------------------------------------------")
         print ("Thank you for your business, please come again!")
 
-
         #Writing values to a receipt file
         with open('receipts/receipt.' + str(t) + 'txt', "w") as file: #https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/file-management.md
             file.write("Below Please Find Your Grocery List!")
@@ -119,5 +119,9 @@ while True:
             file.write("Total Price: " + to_usd(total))
             file.write("\n") 
 
+        break
+
     else:
         l.append(int(user_input))
+
+
