@@ -9,7 +9,7 @@ b. Completed Challenge 3; Incorporates a new banana item and factors in the pric
 
 2. Project, Revisited
 a. Completed Basic Formatting Challenges: now has tests for formatting prices and timestamps
-b. Completed Intermediate Challenge: Calculating Receipt Totals 
+b. Completed Intermediate Challenge: Calculating Receipt Totals and Finding Products
 
 3. Code Revamp:
 a. Per the grading feedback, ensured that document now has a .py extension
