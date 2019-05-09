@@ -59,6 +59,7 @@ while True:
         price = (product["price"]) 
 
         sum = 0
+        r = []
         for p in matching_products:
             #price_usd = p["price"]
             price_usd = "${0: .2f}".format(p["price"])
@@ -66,7 +67,7 @@ while True:
             sum = sum + p["price"]
             x = sum
 
-            r = []
+            
             r.append(("+ " + p["name"] + " " + str (price_usd)))
 
         #Writing values to a receipt file
@@ -92,7 +93,7 @@ while True:
         print ("-------------------------------------------")
         print ("Thank you for your business, please come again!")
 
-        break
+
 
     else:
         l.append(int(user_input))
