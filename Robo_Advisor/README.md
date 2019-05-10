@@ -40,4 +40,4 @@ Code Revamp:
 1. to run this script, please navigate to the robo_advisor directory --> app directory --> and then type "python my_robo.py" in your terminal 
 2. IMPORTANT: For running pytests, please navigate to the robo_advisor directory --> app directory --> my_robo_test.py document and, on line 55 where it says exists = os.filepath, make sure that you change my hardcoded path to the one specific to your computer. The relative file path will not work. 
 3. For running pytests please navigate to the robo_advisor (note: not the app directory! If you are in app make sure you cd ..) directory and then type "pytest" in your terminal
-3. 
+
