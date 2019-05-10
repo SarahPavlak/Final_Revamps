@@ -72,6 +72,7 @@ if user_input in sales:
             print("Current monthly sales were: " + str(item_sales))
             top.append(dic_two)
 
+            #normalizing the data
             if month == "02":
                 normalized_v = (v/28)*31 #accounting for daily sales and then adjusting if it had been 31 days
                 print("Normalized sales amount is: " + str(to_usd(normalized_v)))
@@ -101,6 +102,7 @@ if user_input in sales:
                 pass
     
             dic = dict([("Product", k), ("Sales", (n[-1]))]) #now data shows normalized version 
+            #print(dic['Product'])
 
             x_axis = (dic["Product"])
             y_axis = (dic["Sales"])
@@ -108,15 +110,14 @@ if user_input in sales:
             graph_y.append(y_axis)
             
 a = 0
+bar_data = []
+scam = len(graph_x)
+while a < scam:
 
-bar_data = [
-            {"Product": graph_x[a], "Revenue USD": graph_y[a]},
-            {"Product": graph_x[1], "Revenue USD": graph_y[1]},
-            {"Product": graph_x[2], "Revenue USD": graph_y[2]},
-            {"Product": graph_x[3], "Revenue USD": graph_y[3]},
-            {"Product": graph_x[4], "Revenue USD": graph_y[4]},
-        ]
-#right now its top 5
+    bar_data.append({"Product": graph_x[a], "Revenue USD": graph_y[a]})
+    a = a + 1
+    
+
 
 x = []
 y = []
@@ -129,7 +130,7 @@ data = [go.Bar(
             x=x,
             y=y,
     )]
-layout = go.Layout(title='Top Five Product Profits ' + str(month_lookup(month)) + " " + year,
+layout = go.Layout(title='Normalized Product Profits ' + str(month_lookup(month)) + " " + year,
     xaxis = dict(title="Item"),
     yaxis = dict(title="Sales (USD)"), 
     margin= go.layout.Margin(l=150, pad=8) 
@@ -138,5 +139,4 @@ layout = go.Layout(title='Top Five Product Profits ' + str(month_lookup(month)) 
 
 figure = go.Figure(data = data,layout=layout)
 py.offline.plot(figure, filename='basic-bar.html', auto_open = True)
-           
- 
+            
