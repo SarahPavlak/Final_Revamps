@@ -22,7 +22,7 @@ Setting up Travis CI:
 2. Find your repository on Github and activate it!
 
 Setting up Pytests
-1. IMPORTANT! For some reason the executive dashboard file is having trouble reading from the dummy csv. Therefore, you MUST go into the Executive_Dashboard folder and in the app directory (my_executive_test.py) and test (my_test.py) directory, change the csv file path right under def get_top_sellers(): and def test_get_top_sellers(): respectively. It is currently set specifically for my computer so you have to copy the file path to your own. 
+1. IMPORTANT! For some reason the executive dashboard file is having trouble reading from the dummy csv. Therefore, you MUST go into the Executive_Dashboard folder and in the app directory (my_executive_test.py) and test (my_test.py) directory, change the csv file path right under def get_top_sellers(): and def test_get_top_sellers(): respectively. It is currently set specifically for my computer so you have to change the file path to your own path. The relative file path was not working; it has to be your reglar "copy path" for the dummy_sales.csv. 
 
 Running this file:
 1. Enter the Executive_Dashboard sub repo --> enter the app sup repo --> type "python executive.py" in your terminal
