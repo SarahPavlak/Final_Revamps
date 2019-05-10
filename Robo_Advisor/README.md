@@ -20,7 +20,9 @@ Setting up Travis CI:
 
 Security requirements:
 1. Within the app directory, create a .env file
-2. Within the app directory, create a ".gitignore" file. Within this file, type ".env"
+2. Navigate to https://www.alphavantage.co/ and request an API Key
+3. Within your .env file, type "MY_API_KEY='your_api_key_goes_here' This will create an environment variable for you which will ensure that your key remains secure.
+3. Within the app directory, create a ".gitignore" file. Within this file, type ".env"
 
 # Changes to Code - for instructor information
 Further Exploration Challenges:
@@ -31,6 +33,7 @@ Project, Revisited
 
 Code Revamp:
 1.  Per the grading feedback, changed the csv file path; the csv data is now inside the app directory so it should not have the same file not found error
+2. Per the grading feedback, erased lines to ensure that request was not being submitted more than once 
 
 # Running the script: 
 1. to run this script, please navigate to the robo_advisor directory --> app directory --> and then type "python my_robo.py" in your terminal 
