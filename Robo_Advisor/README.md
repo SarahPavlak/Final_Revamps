@@ -30,6 +30,7 @@ Further Exploration Challenges:
 
 Project, Revisited
 1.  Completed basic challenges: formatting prices and compiling request URLs
+2. Completed intermediate challenges: tests to ensure that a csv file is written and that it has the proper headers
 
 Code Revamp:
 1.  Per the grading feedback, changed the csv file path; the csv data is now inside the app directory so it should not have the same file not found error
@@ -37,4 +38,6 @@ Code Revamp:
 
 # Running the script: 
 1. to run this script, please navigate to the robo_advisor directory --> app directory --> and then type "python my_robo.py" in your terminal 
-2. for running pytests, please navigate to the robo_advisor (note: not the app directory! If you are in app make sure you cd ..) directory and then type "pytest" in your terminal
+2. IMPORTANT: For running pytests, please navigate to the robo_advisor directory --> app directory --> my_robo_test.py document and, on line 55 where it says exists = os.filepath, make sure that you change my hardcoded path to the one specific to your computer. The relative file path will not work. 
+3. For running pytests please navigate to the robo_advisor (note: not the app directory! If you are in app make sure you cd ..) directory and then type "pytest" in your terminal
+3. 
