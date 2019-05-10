@@ -25,7 +25,8 @@ print("Your desired stock information comes from:")
 print(request_url)
 print("-----------------------------------------------------")
 
-data=requests.get(request_url)
+request = request_url
+response = requests.get(request_url)
 
 #Validating inputs
 
@@ -33,7 +34,7 @@ while True:
         if user_input.isalpha() and len(user_input) < 6 : 
                 print(user_input)
                 
-                if 'Error' in data.text: #this line adapted from https://github.com/hiepnguyen034/robo-stock/blob/master/robo_advisor.py
+                if 'Error' in response.text: #this line adapted from https://github.com/hiepnguyen034/robo-stock/blob/master/robo_advisor.py
                         print('The stock you are looking for is not here. The program will now close.')
                         exit()
                 break
@@ -46,9 +47,6 @@ while True:
         #source: https://stackoverflow.com/questions/36432954/python-validation-to-ensure-input-only-contains-characters-a-z
         #source: https://stackoverflow.com/questions/8761778/limiting-python-input-strings-to-certain-characters-and-lengths 
   
-
-request = request_url
-response = requests.get(request_url)
 
 
 parsed_response = json.loads(response.text) #from class
@@ -142,3 +140,4 @@ print("WRITING DATA TO CSV: {csv_file_path}")
 print("-----------------------------------------------------")
 
 parsed_response["Meta Data"].keys()
+
