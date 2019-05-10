@@ -1,1 +1,5 @@
 requests
+sendgrid 
+pandas
+python-dotenv
+plotly

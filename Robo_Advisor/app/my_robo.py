@@ -8,6 +8,7 @@ import pandas as pd
 
 load_dotenv()
 
+#Definitions
 def to_usd(my_price):
         return "${0:,.2f}".format(my_price) #taken from screencast
 
@@ -26,12 +27,10 @@ print(request_url)
 print("-----------------------------------------------------")
 
 data=requests.get(request_url)
-
 #Validating inputs
-
 while True:     
         if user_input.isalpha() and len(user_input) < 6 : 
-                print(user_input)
+                pass
                 
                 if 'Error' in data.text: #this line adapted from https://github.com/hiepnguyen034/robo-stock/blob/master/robo_advisor.py
                         print('The stock you are looking for is not here. The program will now close.')
@@ -42,68 +41,69 @@ while True:
                 exit()
         break
         
-        
         #source: https://stackoverflow.com/questions/36432954/python-validation-to-ensure-input-only-contains-characters-a-z
         #source: https://stackoverflow.com/questions/8761778/limiting-python-input-strings-to-certain-characters-and-lengths 
   
 
-request = request_url
+#Sending Request & Compiling Information 
+# https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/datatypes/dictionaries.md
+
 response = requests.get(request_url)
+parsed_response = json.loads(response.text)
+metadata = parsed_response["Meta Data"]
+tsd = parsed_response["Time Series (Daily)"]
+last_refreshed = metadata["3. Last Refreshed"]
+
+#Transforming Data
+
+rows = []
+
+for date, daily_prices in tsd.items(): # see: https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/datatypes/dictionaries.md
+    row = {
+        "timestamp": date,
+        "open": float(daily_prices["1. open"]),
+        "high": float(daily_prices["2. high"]),
+        "low": float(daily_prices["3. low"]),
+        "close": float(daily_prices["4. close"]),
+        "volume": int(daily_prices["5. volume"])
+    }
+    rows.append(row)
 
 
-parsed_response = json.loads(response.text) #from class
-tsd = parsed_response["Time Series (Daily)"] #from screencast
-dates = list(tsd.keys()) #from screencast
-latest_day = dates[0] #from screencast
-last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"] 
-latest_close_usd = tsd[latest_day]["4. close"] #from screencast
 
 
-high_prices = [] 
-for date in dates:
-    high_price = tsd[date]["2. high"]
-    high_prices.append (float(high_price))
+#CSV Data
 
-recent_high = max(high_prices)
+csv_file_path = os.path.join (os.path.dirname(__file__), "data", "prices_" + user_input + ".csv") #changing where data folder is fixes the prior .. issue
 
-low_prices = [] 
-for date in dates:
-    low_price = tsd[date]["3. low"]
-    low_prices.append (float(low_price))
-
-recent_low = min(low_prices)
-
-csv_file_path = os.path.join (os.path.dirname(__file__), "data", "prices_" + user_input + ".csv")
 csv_header = ["timestamp", "open", "low", "high", "close", "volume"]
 
 with open(csv_file_path, "w") as csv_file:
-        writer = csv.DictWriter (csv_file, fieldnames = csv_header)
-
-        for date in dates:
-            daily_prices = tsd[date]
-
-            writer.writerow({
-                "timestamp": date,  
-                "open": daily_prices["1. open"],
-                "high": daily_prices["2. high"], 
-                "low": daily_prices["3. low"],
-                "close": daily_prices["4. close"], 
-                "volume": daily_prices["5. volume"] 
-        })
+    writer = csv.DictWriter (csv_file, fieldnames = csv_header)
+    for row in rows:
+        writer.writerow(row)
 
 #output results
 
-print("-----------------------------------------------------")
-print(f"STOCK SYMBOL: {symbol}")
-print("RUN AT: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%m:%S")) #use date time module
-print("-----------------------------------------------------")
-print(f"LATEST DAY OF AVAILABLE DATA: {last_refreshed}")
-print(f"LATEST DAILY CLOSING PRICE: {to_usd(float(latest_close_usd))}")
-print(f"RECENT HIGH: {to_usd(float(recent_high))}") 
-print(f"RECENT LOW: {to_usd(float(recent_low))}") 
+dates = list(tsd.keys()) #from screencast
+latest_close = rows[0]["close"]
+high_prices = [row["high"] for row in rows] 
+low_prices = [row["low"] for row in rows] 
+recent_high = max(high_prices)
+recent_low = min(low_prices) #https://github.com/s2t2/robo-advisor-screencast/blob/alt-solution/app/robo_advisor.py
+
+print(f"Stock Symbol: {symbol}")
+print("Run at: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%m:%S")) #use date time module
+print(f"Latest day of data: {last_refreshed}")
+print(f"Latest daily closing price: {to_usd(float(latest_close))}")
+print(f"Recent high: {to_usd(float(recent_high))}") 
+print(f"Recent low: {to_usd(float(recent_low))}") 
 print("-----------------------------------------------------")
 
 #calculating risk
+
+
+
 
 risk_range = float(daily_prices["2. high"]) - float(daily_prices["3. low"])
 print("-----------------------------------------------------")
@@ -121,14 +121,14 @@ risk_span_bottom = to_usd(float(stock_drop))
 if risk_input != 0 < float(risk_input) <100.000001:
         if float(daily_prices["3. low"]) < float(stock_drop):
                 print(f"Your risk span is: {risk_span_bottom} to {risk_span_top}") 
-                print(f"Latest price: {to_usd(float(latest_close_usd))}") 
+                print(f"Latest price: {to_usd(float(latest_close))}") 
                 print ("RECOMMENDATION: Don't Buy!")
                 print ("RECOMMENDATION REASON: Because the latest closing price is not within threshold of your risk tolerance, don't buy.")
                 print("-----------------------------------------------------")
                 
         else:
                 print(f"Your risk span is: {risk_span_bottom} to {risk_span_top}") 
-                print(f"Latest price: {to_usd(float(latest_close_usd))}") 
+                print(f"Latest price: {to_usd(float(latest_close))}") 
                 print("RECOMMENDATION: Buy!")
                 print ("RECOMMENDATION REASON: Because the latest closing price is within threshold of your risk tolerance, buy.")
                 print("-----------------------------------------------------")
@@ -141,4 +141,3 @@ print("-----------------------------------------------------")
 print("WRITING DATA TO CSV: {csv_file_path}")
 print("-----------------------------------------------------")
 
-parsed_response["Meta Data"].keys()

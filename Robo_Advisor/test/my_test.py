@@ -1,4 +1,4 @@
-from app.my_robo_test import to_usd, compile_url
+from app.my_robo_test import to_usd, compile_url, write_to_csv
 
 def test_to_usd():
     result = to_usd(4)
@@ -13,4 +13,9 @@ def test_to_usd():
 def test_compile_url():
     result = compile_url()
     assert result == "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=API_KEY"
+
+
+def test_write_to_csv():
+    result = write_to_csv()
+    assert result == ["timestamp", "open", "low", "high", "close", "volume"]
 

@@ -17,3 +17,13 @@
 #Setting up Travis CI:
 #Log onto Travis-CI.org
 #Find your repository on Github and activate it!
+
+#Security
+
+#Navigate to https://app.sendgrid.com/settings/api_keys and request an API Key 
+#Create a .env file in your virtual code studio or other desired platform. Within the .env file, type "ALPHAVANTAGE_API_KEY='YOUR API KEY GOES HERE' This will create an environment variable for you which will ensure that your key remains secure.
+#Create a ".gitignore" file and, within the file, type ".env"
+
+#In Robo_Advisor Folder: 
+#Navigate to https://www.alphavantage.co/ and request an API Key
+#Create a .env file in your virtual code studio or other desired platform. Within the .env file, type "ALPHAVANTAGE_API_KEY='YOUR API KEY GOES HERE' This will #create an environment variable for you which will ensure that your key remains secure.
