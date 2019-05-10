@@ -60,16 +60,14 @@ if user_input in sales:
         graph_y = []
         n = [] #Challenge 3 Normalizing Data
         top = []
+        print("   ")
         print("Below please find your sales:")
         print("------------------------------------")
         for k,v in count.items():
             dic = dict([("Product", k), ("Sales", v)])
             dic_two = (k + " " + str(to_usd(v)))
-            item = k
-            item_sales = str(to_usd(v))
 
-            print(item)
-            print("Current monthly sales were: " + str(item_sales))
+            print(dic_two)
             top.append(dic_two)
 
             x_axis = (dic["Product"])
@@ -77,31 +75,20 @@ if user_input in sales:
             graph_x.append(x_axis)
             graph_y.append(y_axis)
 
-            if month == "02":
-                normalized_v = (v/28)*31 #accounting for daily sales and then adjusting if it had been 31 days
-                print("Normalized sales amount is: " + str(to_usd(normalized_v)))
-                print("------------------------------------------------------")
-            else:
-                pass
-
-            thirty = ["04", "06", "09", "11"]
-            if month in thirty:
-                normalized_thirty = (v/30)*31
-                print("Normalized sales amount is: " + str(to_usd(normalized_thirty)))
-                print("------------------------------------------------------")
-            else:
-                pass
-            
-           
-
+        print("   ") 
+        print("Below please find your top sales:")
+        print("------------------------------------")
         print("Top selling product is: " + str(top[0]))
         print("Second selling product is: " + str(top[1]))
         print("Third selling product is: " + str(top[2]))
 
+        print("   ") 
+        print("------------------------------------")
+        print("Thank you for visiting these insights!")
+
     #Extra Graph
         labels = [graph_x[0],graph_x[1],graph_x[2],graph_x[3],graph_x[4]] #decided to show top 5 sales
         values = [graph_y[0],graph_y[1],graph_y[2],graph_y[3],graph_y[4]]
-
 
         trace = go.Pie(labels=labels, values=values) #not letting me convert to usd 
         plotly.offline.plot([trace], filename="basic_pie_chart.html", auto_open=True)
@@ -133,7 +120,7 @@ if user_input in sales:
                     x=x,
                     y=y,
             )]
-        layout = go.Layout(title='Product Profits ' + str(month_lookup(month)) + " " + year,
+        layout = go.Layout(title='Top Five Product Profits ' + str(month_lookup(month)) + " " + year,
             xaxis = dict(title="Item"),
             yaxis = dict(title="Sales (USD)"), 
             margin= go.layout.Margin(l=150, pad=8) 
