@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 import datetime
 import pandas as pd 
-from app.my_robo_test import to_usd, compile_url, write_to_csv_header, write_to_csv
+from app.my_robo_test import to_usd, compile_url, write_to_csv_header, write_to_csv, get_responses, get_responses_dict
 
 load_dotenv()
 
@@ -34,3 +34,11 @@ def test_write_to_csv_header():
 def test_write_to_csv():
     result = write_to_csv()
     assert result == "this csv file exists"
+
+def test_get_responses():
+    result = get_responses()
+    assert result == "dict_keys(['Meta Data', 'Time Series (Daily)'])"
+
+def test_get_responses_dict():
+    result = get_responses_dict()
+    assert result == "<class 'dict'>"
