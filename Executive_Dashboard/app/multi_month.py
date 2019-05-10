@@ -86,60 +86,57 @@ if user_input in sales:
                 print("Normalized sales amount is: " + str(to_usd(normalized_thirty)))
                 print("------------------------------------------------------")
                 n.append(normalized_thirty)
+            
             else:
                 pass
 
-            dic = dict([("Product", k), ("Sales", n[-1])]) #now data shows normalized version 
-         
+            thirty_three = ["01", "03", "05", "07", "08", "10", "12"]
+            if month in thirty_three:
+                normalized_thirty_three = (v/31)*31
+                print("Normalized sales amount is: " + str(to_usd(normalized_thirty_three)))
+                print("------------------------------------------------------")
+                n.append(normalized_thirty_three)
+            
+            else:
+                pass
+    
+            dic = dict([("Product", k), ("Sales", (n[-1]))]) #now data shows normalized version 
+
             x_axis = (dic["Product"])
             y_axis = (dic["Sales"])
             graph_x.append(x_axis)
             graph_y.append(y_axis)
+            
+a = 0
 
+bar_data = [
+            {"Product": graph_x[a], "Revenue USD": graph_y[a]},
+            {"Product": graph_x[1], "Revenue USD": graph_y[1]},
+            {"Product": graph_x[2], "Revenue USD": graph_y[2]},
+            {"Product": graph_x[3], "Revenue USD": graph_y[3]},
+            {"Product": graph_x[4], "Revenue USD": graph_y[4]},
+        ]
+#right now its top 5
+
+x = []
+y = []
+
+for i in range(0, len(bar_data)):
+    x.append(bar_data[i]['Product'])
+    y.append(bar_data[i]['Revenue USD'])
+
+data = [go.Bar(
+            x=x,
+            y=y,
+    )]
+layout = go.Layout(title='Top Five Product Profits ' + str(month_lookup(month)) + " " + year,
+    xaxis = dict(title="Item"),
+    yaxis = dict(title="Sales (USD)"), 
+    margin= go.layout.Margin(l=150, pad=8) 
+    )
+    #code adapted from: https://github.com/s2t2/exec-dash-starter-py/blob/master/monthly_sales.py 
+
+figure = go.Figure(data = data,layout=layout)
+py.offline.plot(figure, filename='basic-bar.html', auto_open = True)
            
-            
-
-    #Graph 2: Bar Graph
-    #variables
-        
-        a = 0
-     
-   
-
-        bar_data = [
-                    {"Product": graph_x[a], "Revenue USD": graph_y[a]},
-                    {"Product": graph_x[1], "Revenue USD": graph_y[1]},
-                    {"Product": graph_x[2], "Revenue USD": graph_y[2]},
-                    {"Product": graph_x[3], "Revenue USD": graph_y[3]},
-                    {"Product": graph_x[4], "Revenue USD": graph_y[4]},
-                ]
-        #right now its top 5
-
-        x = []
-        y = []
-
-        for i in range(0, len(bar_data)):
-            x.append(bar_data[i]['Product'])
-            y.append(bar_data[i]['Revenue USD'])
-
-        data = [go.Bar(
-                    x=x,
-                    y=y,
-            )]
-        layout = go.Layout(title='Normalized Product Profits ' + str(month_lookup(month)) + " " + year,
-            xaxis = dict(title="Item"),
-            yaxis = dict(title="Sales (USD)"), 
-            margin= go.layout.Margin(l=150, pad=8) 
-            )
-            #code adapted from: https://github.com/s2t2/exec-dash-starter-py/blob/master/monthly_sales.py 
-
-        figure = go.Figure(data = data,layout=layout)
-        py.offline.plot(figure, filename='basic-bar.html', auto_open = True)
-
-
-
-else: print("Oh no! That's not a csv option! The program will now gracefully close.") 
-exit 
-            
-
  
