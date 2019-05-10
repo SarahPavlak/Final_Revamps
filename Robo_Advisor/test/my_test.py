@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 import datetime
 import pandas as pd 
-from app.my_robo_test import to_usd, compile_url, write_to_csv_header
+from app.my_robo_test import to_usd, compile_url, write_to_csv_header, write_to_csv
 
 load_dotenv()
 
@@ -30,3 +30,7 @@ def test_write_to_csv_header():
     with open(csv_file_path, "r") as csv_file:
         reader = csv.DictReader(csv_file)
         assert result == ['timestamp', 'open', 'low', 'high', 'close', 'volume']
+
+def test_write_to_csv():
+    result = write_to_csv()
+    assert result == "this csv file exists"
