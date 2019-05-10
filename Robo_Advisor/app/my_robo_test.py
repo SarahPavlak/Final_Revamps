@@ -17,7 +17,7 @@ def compile_url():
     return "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + user_input + "&apikey=" + "API_KEY"
 
 
-#CSV Tests
+#CSV Tests-------------------------------------------
 
 user_input = "AAPL"
 API_KEY = os.environ.get('MY_API_KEY')
@@ -57,3 +57,26 @@ def write_to_csv():
         return("this csv file exists")
     else:
         return("this csv file does not exist")
+
+#API Tests-----------------------------------------------
+load_dotenv()
+API_KEY = os.environ.get('MY_API_KEY')
+
+#Collecting User Information
+
+def get_responses():
+        user_input = "AAPL"
+        request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + user_input + "&apikey=" + API_KEY
+        response = requests.get(request_url)
+        parsed_response = json.loads(response.text) #from class
+        keys = (parsed_response.keys())
+        return (str(keys))
+
+def get_responses_dict():
+        user_input = "AAPL"
+        request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + user_input + "&apikey=" + API_KEY
+        response = requests.get(request_url)
+        parsed_response = json.loads(response.text) #from class
+        dict_response = (type(parsed_response))
+        return(str(dict_response))
+
