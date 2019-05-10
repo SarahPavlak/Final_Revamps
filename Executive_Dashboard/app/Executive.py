@@ -58,24 +58,47 @@ if user_input in sales:
 #Graph 1: Top 5 Sellers Breakdown
         graph_x = []
         graph_y = []
+        n = [] #Challenge 3 Normalizing Data
         top = []
         print("Below please find your sales:")
         print("------------------------------------")
         for k,v in count.items():
             dic = dict([("Product", k), ("Sales", v)])
             dic_two = (k + " " + str(to_usd(v)))
-            print(dic_two)
+            item = k
+            item_sales = str(to_usd(v))
+
+            print(item)
+            print("Current monthly sales were: " + str(item_sales))
             top.append(dic_two)
 
             x_axis = (dic["Product"])
             y_axis = (dic["Sales"])
             graph_x.append(x_axis)
             graph_y.append(y_axis)
-        print("------------------------------------")
+
+            if month == "02":
+                normalized_v = (v/28)*31 #accounting for daily sales and then adjusting if it had been 31 days
+                print("Normalized sales amount is: " + str(to_usd(normalized_v)))
+                print("------------------------------------------------------")
+            else:
+                pass
+
+            thirty = ["04", "06", "09", "11"]
+            if month in thirty:
+                normalized_thirty = (v/30)*31
+                print("Normalized sales amount is: " + str(to_usd(normalized_thirty)))
+                print("------------------------------------------------------")
+            else:
+                pass
+            
+           
+
         print("Top selling product is: " + str(top[0]))
         print("Second selling product is: " + str(top[1]))
         print("Third selling product is: " + str(top[2]))
 
+    #Extra Graph
         labels = [graph_x[0],graph_x[1],graph_x[2],graph_x[3],graph_x[4]] #decided to show top 5 sales
         values = [graph_y[0],graph_y[1],graph_y[2],graph_y[3],graph_y[4]]
 
@@ -84,8 +107,8 @@ if user_input in sales:
         plotly.offline.plot([trace], filename="basic_pie_chart.html", auto_open=True)
        
 
-#Graph 2: Bar Graph
-        #variables
+    #Graph 2: Bar Graph
+    #variables
         
         a = 0
 
@@ -96,11 +119,8 @@ if user_input in sales:
                     {"Product": graph_x[2], "Revenue USD": graph_y[2]},
                     {"Product": graph_x[3], "Revenue USD": graph_y[3]},
                     {"Product": graph_x[4], "Revenue USD": graph_y[4]},
-                    {"Product": graph_x[5], "Revenue USD": graph_y[5]},
-                    {"Product": graph_x[6], "Revenue USD": graph_y[6]},
-                    {"Product": graph_x[7], "Revenue USD": graph_y[7]},
                 ]
-        
+        #right now its top 5
 
         x = []
         y = []
@@ -122,6 +142,7 @@ if user_input in sales:
 
         figure = go.Figure(data = data,layout=layout)
         py.offline.plot(figure, filename='basic-bar.html', auto_open = True)
+
 
 
 else: print("Oh no! That's not a csv option! The program will now gracefully close.") 
