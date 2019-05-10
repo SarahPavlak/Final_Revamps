@@ -99,7 +99,6 @@ if user_input in sales:
         
         a = 0
 
-
         bar_data = [
                     {"Product": graph_x[a], "Revenue USD": graph_y[a]},
                     {"Product": graph_x[1], "Revenue USD": graph_y[1]},
