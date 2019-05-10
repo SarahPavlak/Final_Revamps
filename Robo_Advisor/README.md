@@ -35,6 +35,7 @@ Project, Revisited
 Code Revamp:
 1.  Per the grading feedback, changed the csv file path; the csv data is now inside the app directory so it should not have the same file not found error
 2. Per the grading feedback, erased lines to ensure that request was not being submitted more than once 
+3. Per the grading feedback, redid the stock recommendation to make more sense and be more clear
 
 # Running the script: 
 1. to run this script, please navigate to the robo_advisor directory --> app directory --> and then type "python my_robo.py" in your terminal 
