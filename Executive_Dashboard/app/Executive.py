@@ -62,13 +62,44 @@ if user_input in sales:
         top = []
         print("   ")
         print("Below please find your sales:")
-        print("------------------------------------")
+        print("------------------------------------------------------")
         for k,v in count.items():
             dic = dict([("Product", k), ("Sales", v)])
             dic_two = (k + " " + str(to_usd(v)))
+            item = k
+            item_sales = str(to_usd(v))
 
-            print(dic_two)
+            print(item)
+            print("Current monthly sales were: " + str(item_sales))
             top.append(dic_two)
+
+            if month == "02":
+                normalized_v = (v/28)*31 #accounting for daily sales and then adjusting if it had been 31 days
+                print("Normalized sales amount is: " + str(to_usd(normalized_v)))
+                print("------------------------------------------------------")
+               
+            else:
+                pass
+
+            thirty = ["04", "06", "09", "11"]
+            if month in thirty:
+                normalized_thirty = (v/30)*31
+                print("Normalized sales amount is: " + str(to_usd(normalized_thirty)))
+                print("------------------------------------------------------")
+                
+            
+            else:
+                pass
+
+            thirty_three = ["01", "03", "05", "07", "08", "10", "12"]
+            if month in thirty_three:
+                normalized_thirty_three = (v/31)*31
+                print("Normalized sales amount is: " + str(to_usd(normalized_thirty_three)))
+                print("------------------------------------------------------")
+            
+            else:
+                pass
+            
 
             x_axis = (dic["Product"])
             y_axis = (dic["Sales"])
@@ -77,13 +108,11 @@ if user_input in sales:
 
         print("   ") 
         print("Below please find your top sales:")
-        print("------------------------------------")
         print("Top selling product is: " + str(top[0]))
         print("Second selling product is: " + str(top[1]))
         print("Third selling product is: " + str(top[2]))
 
         print("   ") 
-        print("------------------------------------")
         print("Thank you for visiting these insights!")
 
     #Extra Graph
@@ -97,37 +126,36 @@ if user_input in sales:
     #Graph 2: Bar Graph
     #variables
         
-        a = 0
+    a = 0
+    bar_data = []
+    scam = len(graph_x)
+    while a < scam:
 
-        bar_data = [
-                    {"Product": graph_x[a], "Revenue USD": graph_y[a]},
-                    {"Product": graph_x[1], "Revenue USD": graph_y[1]},
-                    {"Product": graph_x[2], "Revenue USD": graph_y[2]},
-                    {"Product": graph_x[3], "Revenue USD": graph_y[3]},
-                    {"Product": graph_x[4], "Revenue USD": graph_y[4]},
-                ]
-        #right now its top 5
+        bar_data.append({"Product": graph_x[a], "Revenue USD": graph_y[a]})
+        a = a + 1
+        
 
-        x = []
-        y = []
 
-        for i in range(0, len(bar_data)):
-            x.append(bar_data[i]['Product'])
-            y.append(bar_data[i]['Revenue USD'])
+    x = []
+    y = []
 
-        data = [go.Bar(
-                    x=x,
-                    y=y,
-            )]
-        layout = go.Layout(title='Top Five Product Profits ' + str(month_lookup(month)) + " " + year,
-            xaxis = dict(title="Item"),
-            yaxis = dict(title="Sales (USD)"), 
-            margin= go.layout.Margin(l=150, pad=8) 
-            )
-            #code adapted from: https://github.com/s2t2/exec-dash-starter-py/blob/master/monthly_sales.py 
+    for i in range(0, len(bar_data)):
+        x.append(bar_data[i]['Product'])
+        y.append(bar_data[i]['Revenue USD'])
 
-        figure = go.Figure(data = data,layout=layout)
-        py.offline.plot(figure, filename='basic-bar.html', auto_open = True)
+    data = [go.Bar(
+                x=x,
+                y=y,
+        )]
+    layout = go.Layout(title='Normalized Product Profits ' + str(month_lookup(month)) + " " + year,
+        xaxis = dict(title="Item"),
+        yaxis = dict(title="Sales (USD)"), 
+        margin= go.layout.Margin(l=150, pad=8) 
+        )
+        #code adapted from: https://github.com/s2t2/exec-dash-starter-py/blob/master/monthly_sales.py 
+
+    figure = go.Figure(data = data,layout=layout)
+    py.offline.plot(figure, filename='basic-bar.html', auto_open = True)
 
 
 
