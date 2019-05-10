@@ -34,7 +34,7 @@ sales = [
 ]
 
 
-#Assuming validated: 
+#Challenge 1, Validating CSV Header
 if user_input in sales:
     products = []
 
