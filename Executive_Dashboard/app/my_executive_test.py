@@ -8,7 +8,7 @@ def to_usd(i):
     return "${0:,.2f}".format(i)
 
 def get_top_sellers():
-    with open("/Users/SarahPavlak/Desktop/fuq/Final_Revamps/Executive_Dashboard/app/test.csv", 'r') as csvfile:
+    with open("Executive_Dashboard/app/dummy.csv", 'r') as csvfile:
         reader = csv.DictReader(csvfile)
 
         count = {}

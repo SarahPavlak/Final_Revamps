@@ -14,7 +14,7 @@ def test_to_usd():
 def test_get_top_sellers():
     result = get_top_sellers()
 
-    with open("/Users/SarahPavlak/Desktop/fuq/Final_Revamps/Executive_Dashboard/test/test.csv", 'r') as csvfile:
+    with open("Executive_Dashboard/test/dummy.csv", 'r') as csvfile:
         reader = csv.DictReader(csvfile)
 
     assert result == "Button-Down Shirt $5,464.20 Super Soft Sweater $2,249.85 Super Soft Hoodie $1,800.00"
