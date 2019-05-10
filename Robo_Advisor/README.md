@@ -27,10 +27,10 @@ Further Exploration Challenges:
 1.  
 
 Project, Revisited
-1.  
+1.  Completed basic challenges: formatting prices and compiling request URLs
 
 Code Revamp:
-1.  Per the grading feedback, 
+1.  Per the grading feedback, changed the csv file path; the csv data is now inside the app directory so it should not have the same file not found error
 
 # Running the script: 
 1. to run this script, please navigate to the robo_advisor directory --> app directory --> and then type "python my_robo.py" in your terminal 
