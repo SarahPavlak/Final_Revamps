@@ -34,4 +34,5 @@ Code Revamp:
 4.  Per the grading feedback, ensured that each item is properly formatted with a $ and two decimal places
 
 # Running the script: 
-1. to run this script, please enter the app directory and then type "python shopping.py"
+1. to run this script, please navigate to the shopping_cart directory --> app directory --> and then type "python shopping.py" in your terminal 
+2. for running pytests, please navigate to the shopping_cart directory and then type "pytest" in your terminal
