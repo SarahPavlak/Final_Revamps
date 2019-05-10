@@ -5,6 +5,5 @@ python:
 install:
   - pip install -r requirements.txt
 script:
-  - cd <Shopping_Cart>
   - pytest
 #https://stackoverflow.com/questions/24263858/how-can-i-use-travis-for-sub-directory
