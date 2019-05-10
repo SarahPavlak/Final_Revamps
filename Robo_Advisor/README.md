@@ -26,11 +26,11 @@ Security requirements:
 
 # Changes to Code - for instructor information
 Further Exploration Challenges:
-1.  
+1.  Per the travis file, it should run automated tests
 
 Project, Revisited
 1.  Completed basic challenges: formatting prices and compiling request URLs
-2. Completed intermediate challenges: tests to ensure that a csv file is written and that it has the proper headers
+2.  Completed intermediate challenges: tests to ensure that a csv file is written and that it has the proper headers
 
 Code Revamp:
 1.  Per the grading feedback, changed the csv file path; the csv data is now inside the app directory so it should not have the same file not found error
