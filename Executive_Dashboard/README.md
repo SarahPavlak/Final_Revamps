@@ -1,15 +1,12 @@
 # Hello and welcome to my executive dashboard revamp!
 
-In order to run this, you should follow the readme in the main root repository. 
-
-# Setting up your executive_dashboard project!
-
 
 Resources used: 
 1. Syncing Github: https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/3e5cee08b4fa6b206ec5852b7460569f85d9be7d/notes/git.md
 2. Branch Operations: https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/74bfcbd43e60627151ecfb9235253e4015eb0cba/exercises/ci-123.md
 3. Travis CI: https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/74bfcbd43e60627151ecfb9235253e4015eb0cba/exercises/testing-123.md
 
+# Running the code!
 
 New Environment (In your terminal type)
 1. conda create -n final_revamps
