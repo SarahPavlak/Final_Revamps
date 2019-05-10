@@ -33,5 +33,5 @@ Code Revamp:
 3.  Per the grading feedback, updated the tax rate to be consistent with NYC Sales Tax amounts
 4.  Per the grading feedback, ensured that each item is properly formatted with a $ and two decimal places
 
-Running the script:
-#to run this script, please enter the app directory and then type "python shopping.py"
+# Running the script: 
+1. to run this script, please enter the app directory and then type "python shopping.py"
