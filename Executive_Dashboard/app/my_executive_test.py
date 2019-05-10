@@ -7,28 +7,27 @@ from urllib.parse import urlparse
 def to_usd(i):
     return "${0:,.2f}".format(i)
 
+def get_top_sellers():
+    with open("/Users/SarahPavlak/Desktop/fuq/Final_Revamps/Executive_Dashboard/app/test.csv", 'r') as csvfile:
+        reader = csv.DictReader(csvfile)
 
-with open("dummy_sales.csv", 'r') as csvfile:
-    reader = csv.DictReader(csvfile)
+        count = {}
+        for row in reader:
+            d = dict(row)
+            d = {"date": row["date"], "product": row["product"], "unit price": float(row["unit price"]), "units sold": row["units sold"], "sales price": row["sales price"]}
+            total_sales = float(d['units sold'])* float(d['unit price'])
 
-    count = {}
-    for row in reader:
-        d = dict(row)
-        d = {"date": row["date"], "product": row["product"], "unit price": float(row["unit price"]), "units sold": row["units sold"], "sales price": row["sales price"]}
-        total_sales = float(d['units sold'])* float(d['unit price'])
+            if d["product"] not in count:
+                count[d['product']] = (total_sales)
+            else:
+                count[d['product']] += (total_sales)
 
-        if d["product"] not in count:
-            count[d['product']] = (total_sales)
-        else:
-            count[d['product']] += (total_sales)
+        count=dict(sorted(count.items(), key=lambda x: x[1], reverse=True))
 
-    count=dict(sorted(count.items(), key=lambda x: x[1], reverse=True))
-
-    top = []
-    for k,v in count.items():
-        dic = dict([("Product", k), ("Sales", to_usd(v))])
-        dic_two = (k + " " + str(to_usd(v)))
-        #print(dic_two)
-        top.append(dic_two)
-
-    print(top[0])
+        top = []
+        for k,v in count.items():
+            dic = dict([("Product", k), ("Sales", to_usd(v))])
+            dic_two = (k + " " + str(to_usd(v)))
+            #print(dic_two)
+            top.append(dic_two)
+    return str((top[0])) +  " " + str((top[1])) +  " " + str((top[2]))

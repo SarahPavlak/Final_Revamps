@@ -1,5 +1,5 @@
-from app.my_executive_test import to_usd
-
+from app.my_executive_test import to_usd, get_top_sellers
+import csv
 
 def test_to_usd():
     result = to_usd(4)
@@ -10,3 +10,11 @@ def test_to_usd():
 
     result = to_usd(1057.70)
     assert result == '$1,057.70'
+
+def test_get_top_sellers():
+    result = get_top_sellers()
+
+    with open("/Users/SarahPavlak/Desktop/fuq/Final_Revamps/Executive_Dashboard/test/test.csv", 'r') as csvfile:
+        reader = csv.DictReader(csvfile)
+
+    assert result == "Button-Down Shirt $5,464.20 Super Soft Sweater $2,249.85 Super Soft Hoodie $1,800.00"
