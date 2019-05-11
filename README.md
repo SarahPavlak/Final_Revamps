@@ -7,5 +7,6 @@ As per the requirements, this broader repository has been set up with:
 2. Incremental branch development process
 3. CI (pytests work at the individual project levels)
 
+In the event that something goes wrong while accessing my code, I have included videos of myself doing the pytests to demonstrate that they work.
 
 Thanks for a great semester!
