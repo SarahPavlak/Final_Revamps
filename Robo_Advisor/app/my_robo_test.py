@@ -8,6 +8,7 @@ import datetime
 import pandas as pd 
 
 load_dotenv()
+API_KEY = os.environ.get('MY_API_KEY')
 
 #Basic Tests----------------------------------------------------------------------------------------
 
@@ -16,7 +17,7 @@ def to_usd(i):
 
 def compile_url():
     user_input = "MSFT"
-    return "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + user_input + "&apikey=" + "API_KEY"
+    return "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + user_input + "&apikey=" + API_KEY
 
 #CSV & API Tests----------------------------------------------------------------------------------------
 
@@ -55,7 +56,7 @@ def write_to_csv_header():
         return (csv_header)
 
 def write_to_csv():
-    exists = os.path.isfile('/Users/SarahPavlak/Desktop/Final_Revamps-master/Robo_Advisor/app/data/prices_AAPL.csv')
+    exists = os.path.isfile('/Users/SarahPavlak/Desktop/Final_Revamps-master/Robo_Advisor/app/data/prices_AAPL.csv') #mine is configured for me..
     if exists:
         return("this csv file exists")
     else:
