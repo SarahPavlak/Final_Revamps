@@ -9,6 +9,8 @@ import pandas as pd
 
 load_dotenv()
 
+#Basic Tests----------------------------------------------------------------------------------------
+
 def to_usd(i):
     return "${0:,.2f}".format(i)
 
@@ -16,8 +18,7 @@ def compile_url():
     user_input = "MSFT"
     return "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + user_input + "&apikey=" + "API_KEY"
 
-
-#CSV Tests-------------------------------------------
+#CSV & API Tests----------------------------------------------------------------------------------------
 
 user_input = "AAPL"
 API_KEY = os.environ.get('MY_API_KEY')
@@ -46,6 +47,8 @@ with open(csv_file_path, "w") as csv_file:
                 "close": daily_prices["4. close"], 
                 "volume": daily_prices["5. volume"] 
         })
+
+#CSV Requests----------------------------------------------------------------------------------------
 def write_to_csv_header():
     with open(csv_file_path, "r") as csv_file:
         reader = csv.DictReader(csv_file)
@@ -58,25 +61,48 @@ def write_to_csv():
     else:
         return("this csv file does not exist")
 
-#API Tests-----------------------------------------------
-load_dotenv()
-API_KEY = os.environ.get('MY_API_KEY')
-
-#Collecting User Information
-
+#Issuing API Requests----------------------------------------------------------------------------------------
 def get_responses():
-        user_input = "AAPL"
-        request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + user_input + "&apikey=" + API_KEY
-        response = requests.get(request_url)
-        parsed_response = json.loads(response.text) #from class
         keys = (parsed_response.keys())
         return (str(keys))
 
 def get_responses_dict():
-        user_input = "AAPL"
-        request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + user_input + "&apikey=" + API_KEY
-        response = requests.get(request_url)
-        parsed_response = json.loads(response.text) #from class
         dict_response = (type(parsed_response))
         return(str(dict_response))
+
+
+
+
+
+
+#Processing API Requests----------------------------------------------------------------------------------------
+
+#defining variables
+latest_day = dates[0] #from screencast
+last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"] 
+latest_close_usd = tsd[latest_day]["4. close"] #from screencast
+
+high_prices = [] 
+for date in dates:
+    high_price = tsd[date]["2. high"]
+    high_prices.append (float(high_price))
+
+recent_high = max(high_prices)
+
+low_prices = [] 
+for date in dates:
+    low_price = tsd[date]["3. low"]
+    low_prices.append (float(low_price))
+
+recent_low = min(low_prices)
+
+result =  { #adapted from https://github.com/hiepnguyen034/robo-stock/blob/master/robo_advisor.py
+'time':last_refreshed,
+'high': high_price,
+'low': low_price,
+'close': latest_close_usd}
+
+def transform_response():
+        str_result = str(result)
+        return str_result
 
