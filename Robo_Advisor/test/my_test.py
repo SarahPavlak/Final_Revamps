@@ -9,6 +9,7 @@ import pandas as pd
 from app.my_robo_test import to_usd, compile_url, write_to_csv_header, write_to_csv, get_responses, get_responses_dict, transform_response
 
 load_dotenv()
+API_KEY = os.environ.get('MY_API_KEY')
 
 def test_to_usd():
     result = to_usd(4)
@@ -22,7 +23,7 @@ def test_to_usd():
 
 def test_compile_url():
     result = compile_url()
-    assert result == "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=API_KEY"
+    assert result == "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=" + API_KEY
 
 def test_write_to_csv_header():
     result = write_to_csv_header()
@@ -45,4 +46,4 @@ def test_get_responses_dict():
 
 def test_transform_response():
         result = transform_response()
-        assert result == "{'time': '2019-05-10 16:00:01', 'high': '168.3500', 'low': '162.7300', 'close': '197.1800'}"
+        assert result == "{'time': '2019-05-10', 'high': '168.3500', 'low': '162.7300', 'close': '197.1800'}"
