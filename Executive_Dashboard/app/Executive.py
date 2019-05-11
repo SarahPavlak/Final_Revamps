@@ -147,7 +147,7 @@ if user_input in sales:
                 x=x,
                 y=y,
         )]
-    layout = go.Layout(title='Normalized Product Profits ' + str(month_lookup(month)) + " " + year,
+    layout = go.Layout(title='Product Profits ' + str(month_lookup(month)) + " " + year,
         xaxis = dict(title="Item"),
         yaxis = dict(title="Sales (USD)"), 
         margin= go.layout.Margin(l=150, pad=8) 
