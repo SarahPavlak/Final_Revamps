@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 import datetime
 import pandas as pd 
-from app.my_robo_test import to_usd, compile_url, write_to_csv_header, write_to_csv, get_responses, get_responses_dict
+from app.my_robo_test import to_usd, compile_url, write_to_csv_header, write_to_csv, get_responses, get_responses_dict, transform_response
 
 load_dotenv()
 
@@ -42,3 +42,7 @@ def test_get_responses():
 def test_get_responses_dict():
     result = get_responses_dict()
     assert result == "<class 'dict'>"
+
+def test_transform_response():
+        result = transform_response()
+        assert result == "{'time': '2019-05-10 16:00:01', 'high': '168.3500', 'low': '162.7300', 'close': '197.1800'}"
